@@ -31,22 +31,49 @@ To perform fundamental Natural Language Processing (NLP) text preprocessing step
 | | `lemmatizer.lemmatize()` | Converts inflected words into their canonical base dictionary forms |
 
 ## Program
+# Experiment 5: Text Preprocessing on Customer Feedback Using NLTK
+import nltk
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+from nltk.tokenize import word_tokenize
 
-#Text Preprocessing: Tokenization, Stopword Removal, and Lemmatization using NLTK
+# Download required NLTK resources (quiet=True suppresses verbose download logs)
+nltk.download("punkt", quiet=True)
+nltk.download("punkt_tab", quiet=True)
+nltk.download("stopwords", quiet=True)
+nltk.download("wordnet", quiet=True)
 
+# Step 1: Define input customer feedback text
+text = (
+    "The delivery drivers were super helpful, and the orders arrived earlier "
+    "than expected! However, one of the items had minor scratches on the packaging."
+)
+print("=== Original Customer Feedback ===")
+print(text)
+print()
 
-#Step 1: Download NLTK resources
+# Step 2: Tokenize text
+tokens = word_tokenize(text)
+print("=== Tokenized Words & Punctuation ===")
+print(tokens)
+print()
 
-#Step 2: Sample customer feedback text
+# Step 3: Filter punctuation/non-alphabetic tokens and remove stopwords
+stop_words = set(stopwords.words("english"))
+filtered_tokens = [
+    word for word in tokens if word.isalpha() and word.lower() not in stop_words
+]
+print("=== Filtered Tokens (Alphabetic & Stopwords Removed) ===")
+print(filtered_tokens)
+print()
 
-#Step 3: Tokenization
-
-#Step 4: Stopword Removal & Punctuation Filtering
-
-#Step 5: Lemmatization
-
+# Step 4: Lemmatize tokens
+lemmatizer = WordNetLemmatizer()
+lemmatized_tokens = [lemmatizer.lemmatize(word.lower()) for word in filtered_tokens]
+print("=== Lemmatized Tokens ===")
+print(lemmatized_tokens)
 ## Output
-
+<img width="1510" height="282" alt="image" src="https://github.com/user-attachments/assets/b9970c71-7eb9-4d85-8c41-35dd39f39f30" />
 
 ## Result
 The program successfully performed tokenization, punctuation filtering, stopword removal, and lemmatization on the customer feedback text using the NLTK library.
